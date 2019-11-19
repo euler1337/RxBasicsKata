@@ -9,30 +9,34 @@ class CountriesServiceSolved implements CountriesService {
 
     @Override
     public Single<String> countryNameInCapitals(Country country) {
-        return null; // put your solution here
+
+        return Single.just(country.getName().toUpperCase());
     }
 
     public Single<Integer> countCountries(List<Country> countries) {
-        return null; // put your solution here
+
+        return Single.just(countries.size());
     }
 
     public Observable<Long> listPopulationOfEachCountry(List<Country> countries) {
-        return null; // put your solution here;
+
+        return Observable.fromIterable(countries).flatMap(c -> Observable.just(c.getPopulation()));
     }
 
     @Override
     public Observable<String> listNameOfEachCountry(List<Country> countries) {
-        return null; // put your solution here
+
+        return Observable.fromIterable(countries).flatMap(c -> Observable.just(c.getName()));
     }
 
     @Override
     public Observable<Country> listOnly3rdAnd4thCountry(List<Country> countries) {
-        return null; // put your solution here
+        return Observable.just(countries.get(2), countries.get(3));
     }
 
     @Override
     public Single<Boolean> isAllCountriesPopulationMoreThanOneMillion(List<Country> countries) {
-        return null; // put your solution here
+        return Observable.fromIterable(countries).filter(c -> c.getPopulation() >= 1000000).isEmpty();
     }
 
     @Override
